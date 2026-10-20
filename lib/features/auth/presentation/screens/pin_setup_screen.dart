@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/error/failure.dart';
 import 'package:yako/core/presentation/failure_snackbar.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/core/utils/pin_validator.dart';
 import 'package:yako/features/auth/presentation/providers/auth_providers.dart';
 import 'package:yako/features/auth/presentation/providers/registration_providers.dart';
@@ -28,7 +29,7 @@ class _PinSetupScreenState extends ConsumerState<PinSetupScreen> {
   Widget build(BuildContext context) {
     final confirming = _firstPin != null;
     return Scaffold(
-      appBar: AppBar(title: const Text('Code secret')),
+      appBar: AppBar(title: const Tr('pin.title')),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(

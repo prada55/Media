@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/transactions/domain/entities/transaction.dart';
 import 'package:yako/features/transactions/domain/value_objects/transaction_filter.dart';
 import 'package:yako/features/transactions/presentation/providers/transaction_providers.dart';
@@ -21,7 +22,7 @@ class JournalScreen extends ConsumerWidget {
     final results = ref.watch(filteredTransactionsProvider);
     final totals = ref.watch(transactionTotalsProvider(filter)).value;
     return Scaffold(
-      appBar: AppBar(title: const Text('Journal')),
+      appBar: AppBar(title: const Tr('journal.title')),
       body: Column(
         children: [
           Padding(
@@ -49,7 +50,7 @@ class JournalScreen extends ConsumerWidget {
           _Chips(
             children: [
               ChoiceChip(
-                label: const Text('Tout'),
+                label: const Tr('journal.all'),
                 selected: filter.type == null,
                 onSelected: (_) => filterCtrl.setType(null),
               ),
@@ -73,10 +74,9 @@ class JournalScreen extends ConsumerWidget {
           Expanded(
             child: results.when(
               loading: () => const Center(child: CircularProgressIndicator()),
-              error: (_, _) =>
-                  const Center(child: Text('Recherche impossible.')),
+              error: (_, _) => const Center(child: Tr('journal.error')),
               data: (list) => list.isEmpty
-                  ? const Center(child: Text('Aucun résultat.'))
+                  ? const Center(child: Tr('journal.empty'))
                   : ListView.builder(
                       itemCount: list.length,
                       itemBuilder: (context, i) => TransactionCard(

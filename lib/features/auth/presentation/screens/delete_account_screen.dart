@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/presentation/failure_snackbar.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/auth/presentation/providers/auth_providers.dart';
 import 'package:yako/features/auth/presentation/widgets/pin_entry.dart';
 
@@ -25,7 +26,7 @@ class _DeleteAccountScreenState extends ConsumerState<DeleteAccountScreen> {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(title: const Text('Supprimer mon compte')),
+      appBar: AppBar(title: const Tr('delete.title')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -41,7 +42,7 @@ class _DeleteAccountScreenState extends ConsumerState<DeleteAccountScreen> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
-              const Text('Tapez votre code secret pour continuer'),
+              const Tr('delete.enter_pin'),
               const SizedBox(height: 16),
               if (_busy)
                 const CircularProgressIndicator()
@@ -90,7 +91,7 @@ class _DeleteAccountScreenState extends ConsumerState<DeleteAccountScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Annuler'),
+            child: const Tr('common.cancel'),
           ),
           FilledButton(
             key: ValueKey('confirm-$action'),

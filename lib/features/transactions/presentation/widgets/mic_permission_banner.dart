@@ -3,6 +3,7 @@
 // Micro refusé : explication + bouton « Ouvrir les réglages ».
 
 import 'package:flutter/material.dart';
+import 'package:yako/core/presentation/l10n.dart';
 
 /// Shown when the microphone permission is denied.
 class MicPermissionBanner extends StatelessWidget {
@@ -32,7 +33,7 @@ class MicPermissionBanner extends StatelessWidget {
             FilledButton(
               key: const ValueKey('open-settings'),
               onPressed: onOpenSettings,
-              child: const Text('Ouvrir les réglages'),
+              child: const Tr('mic.open_settings'),
             ),
           ],
         ),

@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/constants/app_strings.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/auth/presentation/providers/registration_providers.dart';
 import 'package:yako/features/auth/presentation/screens/phone_input_screen.dart';
 import 'package:yako/features/auth/presentation/widgets/language_selector.dart';
@@ -29,7 +30,7 @@ class OnboardingScreen extends ConsumerWidget {
               Text(AppStrings.appName, style: theme.textTheme.headlineMedium),
               const SizedBox(height: 8),
               Text(
-                'Parlez, Yako compte pour vous.',
+                context.tr('onboarding.slogan'),
                 style: theme.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
@@ -50,7 +51,7 @@ class OnboardingScreen extends ConsumerWidget {
                       builder: (_) => const PhoneInputScreen(),
                     ),
                   ),
-                  child: const Text('Commencer'),
+                  child: const Tr('onboarding.start'),
                 ),
               ),
             ],

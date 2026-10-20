@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/presentation/failure_snackbar.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/auth/presentation/providers/auth_providers.dart';
 
 /// Biometric opt-in offer.
@@ -46,7 +47,7 @@ class BiometricPromptScreen extends ConsumerWidget {
               FilledButton(
                 key: const ValueKey('biometric-enable'),
                 onPressed: () => _enable(context, ref),
-                child: const Text('Activer'),
+                child: const Tr('biometric.enable'),
               ),
               const SizedBox(height: 12),
               OutlinedButton(
@@ -57,7 +58,7 @@ class BiometricPromptScreen extends ConsumerWidget {
                 onPressed: ref
                     .read(authStateProvider.notifier)
                     .dismissBiometricOffer,
-                child: const Text('Plus tard'),
+                child: const Tr('biometric.later'),
               ),
             ],
           ),

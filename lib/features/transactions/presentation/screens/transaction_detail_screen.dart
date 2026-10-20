@@ -6,11 +6,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/presentation/failure_snackbar.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/core/theme/app_colors.dart';
 import 'package:yako/features/transactions/domain/entities/transaction.dart';
 import 'package:yako/features/transactions/presentation/providers/transaction_actions.dart';
 import 'package:yako/features/transactions/presentation/providers/transaction_providers.dart';
 import 'package:yako/features/transactions/presentation/screens/transaction_edit_screen.dart';
+import 'package:yako/features/translation/presentation/widgets/transcript_translation_view.dart';
 
 /// Transaction detail.
 class TransactionDetailScreen extends ConsumerWidget {
@@ -22,13 +24,12 @@ class TransactionDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final async = ref.watch(transactionByIdProvider(transactionId));
     return Scaffold(
-      appBar: AppBar(title: const Text('Détail')),
+      appBar: AppBar(title: const Tr('detail.title')),
       body: async.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, _) =>
-            const Center(child: Text('Impossible d’afficher cette opération.')),
+        error: (_, _) => const Center(child: Tr('detail.error')),
         data: (t) => t == null
-            ? const Center(child: Text('Cette opération n’existe plus.'))
+            ? const Center(child: Tr('detail.missing'))
             : _Body(transaction: t),
       ),
     );
@@ -65,7 +66,10 @@ class _Body extends ConsumerWidget {
         Text(t.formattedDate),
         if (t.transcriptFr.isNotEmpty) ...[
           const SizedBox(height: 16),
-          Text('« ${t.transcriptFr} »', style: const TextStyle(fontSize: 18)),
+          TranscriptTranslationView(
+            transcriptFr: t.transcriptFr,
+            transcriptLocal: t.transcriptLocal,
+          ),
         ],
         const SizedBox(height: 32),
         if (t.audioPath != null)
@@ -79,7 +83,7 @@ class _Body extends ConsumerWidget {
               }
             },
             icon: const Icon(Icons.play_arrow),
-            label: const Text('Écouter'),
+            label: const Tr('detail.listen'),
           ),
         const SizedBox(height: 12),
         OutlinedButton.icon(
@@ -90,7 +94,7 @@ class _Body extends ConsumerWidget {
             ),
           ),
           icon: const Icon(Icons.edit),
-          label: const Text('Modifier'),
+          label: const Tr('common.edit'),
         ),
         const SizedBox(height: 12),
         TextButton.icon(
@@ -100,7 +104,7 @@ class _Body extends ConsumerWidget {
           ),
           onPressed: () => _delete(context, ref),
           icon: const Icon(Icons.delete_outline),
-          label: const Text('Supprimer'),
+          label: const Tr('common.delete'),
         ),
       ],
     );
@@ -118,12 +122,12 @@ class _Body extends ConsumerWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('Non'),
+              child: const Tr('common.no'),
             ),
             FilledButton(
               key: const ValueKey('confirm-delete'),
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Oui'),
+              child: const Tr('common.yes'),
             ),
           ],
         ),

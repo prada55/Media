@@ -9,6 +9,8 @@ import 'package:yako/features/transactions/domain/entities/transaction.dart';
 import 'package:yako/features/transactions/domain/entities/transaction_draft.dart';
 import 'package:yako/features/transactions/domain/services/microphone_permission.dart';
 import 'package:yako/features/transactions/presentation/providers/transaction_providers.dart';
+import 'package:yako/features/translation/domain/entities/language_code.dart';
+import 'package:yako/features/translation/presentation/providers/translation_providers.dart';
 
 /// Steps of the record screen.
 enum RecordPhase { idle, recording, transcribing, review }
@@ -22,6 +24,7 @@ final class RecordUiState {
     this.transcript = '',
     this.notice,
     this.saving = false,
+    this.translation,
   });
 
   final RecordPhase phase;
@@ -37,6 +40,9 @@ final class RecordUiState {
   final String? notice;
   final bool saving;
 
+  /// Dernière demande de traduction de la transcription.
+  final RecordTranslation? translation;
+
   bool get hasAudio => tempAudioPath != null;
 
   RecordUiState copyWith({
@@ -46,6 +52,7 @@ final class RecordUiState {
     String? transcript,
     String? Function()? notice,
     bool? saving,
+    RecordTranslation? Function()? translation,
   }) => RecordUiState(
     phase: phase ?? this.phase,
     permission: permission ?? this.permission,
@@ -53,7 +60,18 @@ final class RecordUiState {
     transcript: transcript ?? this.transcript,
     notice: notice == null ? this.notice : notice(),
     saving: saving ?? this.saving,
+    translation: translation == null ? this.translation : translation(),
   );
+}
+
+/// Translation of the transcript into a local language.
+final class RecordTranslation {
+  const RecordTranslation({required this.language, this.text});
+
+  final LanguageCode language;
+
+  /// `null` = non traduit (badge « Non traduit »).
+  final String? text;
 }
 
 final NotifierProvider<RecordController, RecordUiState>
@@ -139,6 +157,20 @@ class RecordController extends Notifier<RecordUiState> {
   }
 
   /// Skips voice entirely (manual form).
+  /// Translates the transcript; failure → « Non traduit » badge.
+  Future<void> translate(LanguageCode to) async {
+    final text = state.transcript;
+    if (text.trim().isEmpty) return;
+    final result = await ref
+        .read(translationServiceProvider)
+        .translate(text, from: LanguageCode.fr, to: to);
+    if (!ref.mounted) return;
+    state = state.copyWith(
+      translation: () =>
+          RecordTranslation(language: to, text: result.getOrNull()?.text),
+    );
+  }
+
   void typeManually() =>
       state = state.copyWith(phase: RecordPhase.review, notice: () => null);
 
@@ -174,6 +206,7 @@ class RecordController extends Notifier<RecordUiState> {
             amount: amount,
             category: category,
             transcriptFr: transcript.trim(),
+            transcriptLocal: state.translation?.text,
             audioPath: audioPath,
           ),
         );

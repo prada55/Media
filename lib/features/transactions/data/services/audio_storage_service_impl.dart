@@ -11,12 +11,10 @@ import 'package:uuid/uuid.dart';
 import 'package:yako/core/error/failure.dart';
 import 'package:yako/core/error/result.dart';
 import 'package:yako/core/platform/app_directories.dart';
+import 'package:yako/core/security/data_key_reader.dart';
 import 'package:yako/core/security/encryption_service.dart';
 import 'package:yako/core/utils/secure_file.dart';
 import 'package:yako/features/transactions/domain/services/audio_storage_service.dart';
-
-/// Returns the session data key, `null` when locked.
-typedef DataKeyReader = String? Function();
 
 /// Default [AudioStorageService].
 class AudioStorageServiceImpl implements AudioStorageService {

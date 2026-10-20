@@ -1,0 +1,371 @@
+{
+  "meta": {
+    "source": "bci",
+    "target": "fr",
+    "status": "placeholder",
+    "note": "PLACEHOLDER — traduction à fournir par un locuteur natif. Ne pas inventer.",
+    "version": 1
+  },
+  "entries": [
+    {
+      "id": "salutations_01",
+      "bci": null,
+      "fr": "bonjour",
+      "category": "salutations"
+    },
+    {
+      "id": "salutations_02",
+      "bci": null,
+      "fr": "bonsoir",
+      "category": "salutations"
+    },
+    {
+      "id": "salutations_03",
+      "bci": null,
+      "fr": "comment ça va",
+      "category": "salutations"
+    },
+    {
+      "id": "salutations_04",
+      "bci": null,
+      "fr": "ça va bien",
+      "category": "salutations"
+    },
+    {
+      "id": "salutations_05",
+      "bci": null,
+      "fr": "bienvenue",
+      "category": "salutations"
+    },
+    {
+      "id": "salutations_06",
+      "bci": null,
+      "fr": "au revoir",
+      "category": "salutations"
+    },
+    {
+      "id": "salutations_07",
+      "bci": null,
+      "fr": "à demain",
+      "category": "salutations"
+    },
+    {
+      "id": "salutations_08",
+      "bci": null,
+      "fr": "bonne journée",
+      "category": "salutations"
+    },
+    {
+      "id": "salutations_09",
+      "bci": null,
+      "fr": "comment va la famille",
+      "category": "salutations"
+    },
+    {
+      "id": "salutations_10",
+      "bci": null,
+      "fr": "on se voit plus tard",
+      "category": "salutations"
+    },
+    {
+      "id": "chiffres_montants_01",
+      "bci": null,
+      "fr": "cent francs",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "chiffres_montants_02",
+      "bci": null,
+      "fr": "cinq cents francs",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "chiffres_montants_03",
+      "bci": null,
+      "fr": "mille francs",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "chiffres_montants_04",
+      "bci": null,
+      "fr": "deux mille francs",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "chiffres_montants_05",
+      "bci": null,
+      "fr": "cinq mille francs",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "chiffres_montants_06",
+      "bci": null,
+      "fr": "dix mille francs",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "chiffres_montants_07",
+      "bci": null,
+      "fr": "vingt-cinq mille francs",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "chiffres_montants_08",
+      "bci": null,
+      "fr": "cinquante mille francs",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "chiffres_montants_09",
+      "bci": null,
+      "fr": "cent mille francs",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "chiffres_montants_10",
+      "bci": null,
+      "fr": "combien ça coûte",
+      "category": "chiffres_montants"
+    },
+    {
+      "id": "produits_01",
+      "bci": null,
+      "fr": "riz",
+      "category": "produits"
+    },
+    {
+      "id": "produits_02",
+      "bci": null,
+      "fr": "tomate",
+      "category": "produits"
+    },
+    {
+      "id": "produits_03",
+      "bci": null,
+      "fr": "piment",
+      "category": "produits"
+    },
+    {
+      "id": "produits_04",
+      "bci": null,
+      "fr": "boisson",
+      "category": "produits"
+    },
+    {
+      "id": "produits_05",
+      "bci": null,
+      "fr": "pain",
+      "category": "produits"
+    },
+    {
+      "id": "produits_06",
+      "bci": null,
+      "fr": "essence",
+      "category": "produits"
+    },
+    {
+      "id": "produits_07",
+      "bci": null,
+      "fr": "huile",
+      "category": "produits"
+    },
+    {
+      "id": "produits_08",
+      "bci": null,
+      "fr": "sucre",
+      "category": "produits"
+    },
+    {
+      "id": "produits_09",
+      "bci": null,
+      "fr": "poisson",
+      "category": "produits"
+    },
+    {
+      "id": "produits_10",
+      "bci": null,
+      "fr": "attiéké",
+      "category": "produits"
+    },
+    {
+      "id": "actions_01",
+      "bci": null,
+      "fr": "vendre",
+      "category": "actions"
+    },
+    {
+      "id": "actions_02",
+      "bci": null,
+      "fr": "acheter",
+      "category": "actions"
+    },
+    {
+      "id": "actions_03",
+      "bci": null,
+      "fr": "payer",
+      "category": "actions"
+    },
+    {
+      "id": "actions_04",
+      "bci": null,
+      "fr": "crédit",
+      "category": "actions"
+    },
+    {
+      "id": "actions_05",
+      "bci": null,
+      "fr": "dette",
+      "category": "actions"
+    },
+    {
+      "id": "actions_06",
+      "bci": null,
+      "fr": "rembourser",
+      "category": "actions"
+    },
+    {
+      "id": "actions_07",
+      "bci": null,
+      "fr": "livrer",
+      "category": "actions"
+    },
+    {
+      "id": "actions_08",
+      "bci": null,
+      "fr": "stock",
+      "category": "actions"
+    },
+    {
+      "id": "actions_09",
+      "bci": null,
+      "fr": "rupture de stock",
+      "category": "actions"
+    },
+    {
+      "id": "actions_10",
+      "bci": null,
+      "fr": "faire la monnaie",
+      "category": "actions"
+    },
+    {
+      "id": "temps_01",
+      "bci": null,
+      "fr": "aujourd'hui",
+      "category": "temps"
+    },
+    {
+      "id": "temps_02",
+      "bci": null,
+      "fr": "hier",
+      "category": "temps"
+    },
+    {
+      "id": "temps_03",
+      "bci": null,
+      "fr": "demain",
+      "category": "temps"
+    },
+    {
+      "id": "temps_04",
+      "bci": null,
+      "fr": "cette semaine",
+      "category": "temps"
+    },
+    {
+      "id": "temps_05",
+      "bci": null,
+      "fr": "la semaine prochaine",
+      "category": "temps"
+    },
+    {
+      "id": "temps_06",
+      "bci": null,
+      "fr": "ce mois",
+      "category": "temps"
+    },
+    {
+      "id": "temps_07",
+      "bci": null,
+      "fr": "le mois dernier",
+      "category": "temps"
+    },
+    {
+      "id": "temps_08",
+      "bci": null,
+      "fr": "ce matin",
+      "category": "temps"
+    },
+    {
+      "id": "temps_09",
+      "bci": null,
+      "fr": "ce soir",
+      "category": "temps"
+    },
+    {
+      "id": "temps_10",
+      "bci": null,
+      "fr": "maintenant",
+      "category": "temps"
+    },
+    {
+      "id": "politesse_01",
+      "bci": null,
+      "fr": "merci",
+      "category": "politesse"
+    },
+    {
+      "id": "politesse_02",
+      "bci": null,
+      "fr": "merci beaucoup",
+      "category": "politesse"
+    },
+    {
+      "id": "politesse_03",
+      "bci": null,
+      "fr": "s'il vous plaît",
+      "category": "politesse"
+    },
+    {
+      "id": "politesse_04",
+      "bci": null,
+      "fr": "excusez-moi",
+      "category": "politesse"
+    },
+    {
+      "id": "politesse_05",
+      "bci": null,
+      "fr": "pardon",
+      "category": "politesse"
+    },
+    {
+      "id": "politesse_06",
+      "bci": null,
+      "fr": "de rien",
+      "category": "politesse"
+    },
+    {
+      "id": "politesse_07",
+      "bci": null,
+      "fr": "avec plaisir",
+      "category": "politesse"
+    },
+    {
+      "id": "politesse_08",
+      "bci": null,
+      "fr": "je vous en prie",
+      "category": "politesse"
+    },
+    {
+      "id": "politesse_09",
+      "bci": null,
+      "fr": "à votre service",
+      "category": "politesse"
+    },
+    {
+      "id": "politesse_10",
+      "bci": null,
+      "fr": "bonne arrivée",
+      "category": "politesse"
+    }
+  ]
+}

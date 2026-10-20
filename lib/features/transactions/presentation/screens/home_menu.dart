@@ -7,6 +7,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/auth/presentation/providers/auth_providers.dart';
 import 'package:yako/features/auth/presentation/screens/delete_account_screen.dart';
 
@@ -31,8 +32,8 @@ class HomeMenu extends ConsumerWidget {
         }
       },
       itemBuilder: (_) => const [
-        PopupMenuItem(value: 'logout', child: Text('Se déconnecter')),
-        PopupMenuItem(value: 'delete', child: Text('Supprimer mon compte')),
+        PopupMenuItem(value: 'logout', child: Tr('menu.logout')),
+        PopupMenuItem(value: 'delete', child: Tr('delete.title')),
       ],
     );
   }

@@ -14,6 +14,7 @@ import 'package:yako/features/transactions/presentation/screens/home_screen.dart
 
 import '../../helpers/auth_harness.dart';
 import '../../helpers/fake_transaction_repository.dart';
+import '../../helpers/l10n.dart';
 
 Future<void> _settle(WidgetTester tester) async {
   // PBKDF2 runs in an isolate and SQLite does real I/O: let them finish.
@@ -34,6 +35,8 @@ Future<void> _typePin(WidgetTester tester, String pin) async {
 }
 
 void main() {
+  setUpAll(loadTestL10n);
+
   testWidgets('registration, biometric offer, lock and unlock', (tester) async {
     final harness = (await tester.runAsync(AuthHarness.create))!;
     addTearDown(() => tester.runAsync(harness.dispose));

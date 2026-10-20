@@ -5,6 +5,7 @@
 // [onSubmit] ; la persistance est faite par le contrôleur.
 
 import 'package:flutter/material.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/core/utils/fcfa_formatter.dart';
 import 'package:yako/features/transactions/domain/entities/transaction.dart';
 import 'package:yako/features/transactions/presentation/widgets/category_chips.dart';
@@ -129,7 +130,7 @@ class _TransactionFormState extends State<TransactionForm> {
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : const Icon(Icons.check),
-              label: const Text('Enregistrer'),
+              label: const Tr('common.save'),
             );
           },
         ),

@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/core/theme/app_colors.dart';
 import 'package:yako/features/transactions/domain/entities/transaction.dart';
 import 'package:yako/features/transactions/domain/value_objects/transaction_filter.dart';
@@ -27,25 +28,25 @@ class TotalsHeader extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Text('Aujourd’hui', style: Theme.of(context).textTheme.titleLarge),
+            Tr('totals.today', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 12),
             Row(
               children: [
                 _Cell(
-                  label: 'Ventes',
+                  label: context.tr('totals.sales'),
                   value: totals?.totalSales ?? 0,
                   color: AppColors.sale,
                   icon: Icons.arrow_downward,
                 ),
                 _Cell(
-                  label: 'Dépenses',
+                  label: context.tr('totals.expenses'),
                   value: totals?.totalExpenses ?? 0,
                   color: AppColors.expense,
                   icon: Icons.arrow_upward,
                 ),
                 _Cell(
                   key: const ValueKey('totals-balance'),
-                  label: 'Solde',
+                  label: context.tr('totals.balance'),
                   value: balance,
                   color: balance >= 0 ? AppColors.sale : AppColors.expense,
                   icon: Icons.account_balance_wallet,

@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/error/failure.dart';
 import 'package:yako/core/presentation/failure_snackbar.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/auth/presentation/providers/auth_providers.dart';
 import 'package:yako/features/auth/presentation/screens/biometric_prompt_screen.dart';
 import 'package:yako/features/auth/presentation/widgets/lockout_banner.dart';
@@ -36,7 +37,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final locked = ref.watch(lockoutRemainingProvider).value != null;
     final user = ref.watch(registeredUserProvider).value;
     return Scaffold(
-      appBar: AppBar(title: const Text('Connexion')),
+      appBar: AppBar(title: const Tr('login.title')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -77,7 +78,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   key: const ValueKey('login-biometric'),
                   onPressed: _busy ? null : _loginWithBiometrics,
                   icon: const Icon(Icons.fingerprint, size: 32),
-                  label: const Text('Utiliser mon empreinte'),
+                  label: const Tr('auth.use_biometrics'),
                 ),
             ],
           ),

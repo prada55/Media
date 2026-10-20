@@ -125,3 +125,13 @@ final class FailureException implements Exception {
   @override
   String toString() => 'FailureException($failure)';
 }
+
+/// Aucune traduction fiable disponible (dictionnaire, cache, modèle).
+final class TranslationUnavailableFailure extends Failure {
+  const TranslationUnavailableFailure({
+    super.technicalMessage = 'No translation available',
+    super.userMessageFr = 'Non traduit',
+    super.cause,
+    super.stackTrace,
+  });
+}

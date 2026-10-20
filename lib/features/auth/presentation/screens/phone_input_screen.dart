@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/core/utils/phone_validator.dart';
 import 'package:yako/features/auth/presentation/providers/registration_providers.dart';
 import 'package:yako/features/auth/presentation/screens/pin_setup_screen.dart';
@@ -29,7 +30,7 @@ class _PhoneInputScreenState extends ConsumerState<PhoneInputScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Votre numéro')),
+      appBar: AppBar(title: const Tr('phone.title')),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -71,7 +72,7 @@ class _PhoneInputScreenState extends ConsumerState<PhoneInputScreen> {
                     onPressed: result.isSuccess
                         ? () => _continue(result.getOrNull()!)
                         : null,
-                    child: const Text('Continuer'),
+                    child: const Tr('common.continue'),
                   ),
                 ],
               );

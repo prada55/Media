@@ -14,6 +14,7 @@ import 'package:yako/features/transactions/presentation/widgets/transaction_card
 import 'package:yako/features/translation/domain/entities/language_code.dart';
 
 import '../helpers/fake_transaction_repository.dart';
+import '../helpers/l10n.dart';
 import '../helpers/mocks.dart';
 
 final _user = User(
@@ -46,6 +47,8 @@ Widget _app(FakeTransactionRepository repo) => ProviderScope(
 );
 
 void main() {
+  setUpAll(loadTestL10n);
+
   testWidgets('empty state with the micro button', (tester) async {
     await tester.pumpWidget(_app(FakeTransactionRepository()));
     await tester.pumpAndSettle();

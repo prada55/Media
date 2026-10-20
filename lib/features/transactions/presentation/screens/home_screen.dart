@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/constants/app_strings.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/auth/presentation/providers/auth_providers.dart';
 import 'package:yako/features/transactions/domain/entities/transaction.dart';
 import 'package:yako/features/transactions/presentation/providers/transaction_providers.dart';
@@ -30,13 +31,13 @@ class HomeScreen extends ConsumerWidget {
         actions: [
           IconButton(
             key: const ValueKey('home-journal'),
-            tooltip: 'Journal',
+            tooltip: context.tr('journal.title'),
             icon: const Icon(Icons.list_alt),
             onPressed: () => _push(context, const JournalScreen()),
           ),
           IconButton(
             key: const ValueKey('home-lock'),
-            tooltip: 'Verrouiller',
+            tooltip: context.tr('home.lock'),
             icon: const Icon(Icons.lock_outline),
             onPressed: ref.read(authStateProvider.notifier).lock,
           ),
@@ -57,7 +58,7 @@ class HomeScreen extends ConsumerWidget {
               ],
               error: (_, _) => const [
                 SliverFillRemaining(
-                  child: Center(child: Text('Données indisponibles.')),
+                  child: Center(child: Tr('common.data_unavailable')),
                 ),
               ],
               data: (list) => list.isEmpty

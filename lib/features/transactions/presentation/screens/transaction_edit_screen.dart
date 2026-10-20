@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/presentation/failure_snackbar.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/transactions/domain/entities/transaction.dart';
 import 'package:yako/features/transactions/presentation/providers/transaction_actions.dart';
 import 'package:yako/features/transactions/presentation/widgets/transaction_form.dart';
@@ -18,7 +19,7 @@ class TransactionEditScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Modifier')),
+      appBar: AppBar(title: const Tr('common.edit')),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16),

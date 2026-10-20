@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/error/failure.dart';
 import 'package:yako/core/presentation/failure_snackbar.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/auth/domain/entities/user.dart';
 import 'package:yako/features/auth/presentation/providers/auth_providers.dart';
 import 'package:yako/features/auth/presentation/screens/biometric_prompt_screen.dart';
@@ -56,7 +57,7 @@ class _LockScreenState extends ConsumerState<LockScreen> {
                   style: theme.textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 8),
-                const Text('Tapez votre code secret'),
+                const Tr('lock.enter_pin'),
                 const SizedBox(height: 24),
                 if (_busy)
                   const Padding(
@@ -70,7 +71,7 @@ class _LockScreenState extends ConsumerState<LockScreen> {
                     key: const ValueKey('lock-biometric'),
                     onPressed: _busy ? null : _biometric,
                     icon: const Icon(Icons.fingerprint, size: 32),
-                    label: const Text('Utiliser mon empreinte'),
+                    label: const Tr('auth.use_biometrics'),
                   ),
               ],
             ),

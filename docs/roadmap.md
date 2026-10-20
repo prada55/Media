@@ -47,3 +47,15 @@ Tout `TODO` du code doit pointer vers une entrée de ce fichier (`TODO(roadmap#N
 
 - **R4** — Intégrer `SherpaOnnxSttEngine` (voir `docs/voice-rd.md`).
 - **R5** — Index `transactions(created_at DESC)` déjà présent ; au-delà de 10 000 opérations, envisager une table d'agrégats journaliers chiffrés pour les totaux.
+
+## Décisions Phase 4
+
+| # | Décision | Raison |
+|---|----------|--------|
+| D15 | Dictionnaires et UI DYU/BCI livrés avec valeurs `null` | Interdiction d'inventer des traductions ; repli français + badge « Non traduit » |
+| D16 | Cache de traduction : SHA-256 de la source + texte traduit chiffré (clé de session) | Les transcriptions sont des données sensibles |
+| D17 | `StubTranslationEngine` (pas de TFLite) | Aucun modèle < 100 Mo validé ; baoulé absent de NLLB-200 |
+| D18 | Localisation : `context.tr()` / `Tr()` + `L10nScope` ; les messages d'erreur du domaine (`userMessageFr`) restent en français | Refactor léger demandé |
+
+- **R6** — Faire compléter `assets/i18n/*` par des locuteurs natifs (procédure dans `docs/translation-rd.md`).
+- **R7** — Localiser les `userMessageFr` des Failures via des clés (refactor des couches domaine).

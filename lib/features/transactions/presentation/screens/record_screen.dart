@@ -7,10 +7,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/presentation/failure_snackbar.dart';
+import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/transactions/domain/services/microphone_permission.dart';
 import 'package:yako/features/transactions/presentation/providers/record_controller.dart';
 import 'package:yako/features/transactions/presentation/widgets/mic_permission_banner.dart';
 import 'package:yako/features/transactions/presentation/widgets/micro_fab.dart';
+import 'package:yako/features/transactions/presentation/widgets/record_translation_panel.dart';
 import 'package:yako/features/transactions/presentation/widgets/record_waveform.dart';
 import 'package:yako/features/transactions/presentation/widgets/transaction_form.dart';
 
@@ -27,7 +29,7 @@ class RecordScreen extends ConsumerWidget {
         state.permission == MicPermission.denied ||
         state.permission == MicPermission.permanentlyDenied;
     return Scaffold(
-      appBar: AppBar(title: const Text('Nouvelle opération')),
+      appBar: AppBar(title: const Tr('record.title')),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16),
@@ -54,7 +56,7 @@ class RecordScreen extends ConsumerWidget {
                     children: [
                       CircularProgressIndicator(),
                       SizedBox(height: 8),
-                      Text('Yako écrit ce que vous avez dit…'),
+                      Tr('record.transcribing'),
                     ],
                   ),
                 ),
@@ -70,7 +72,7 @@ class RecordScreen extends ConsumerWidget {
               TextButton(
                 key: const ValueKey('type-manually'),
                 onPressed: controller.typeManually,
-                child: const Text('Écrire sans parler'),
+                child: const Tr('record.type_manually'),
               ),
             ] else
               _Review(state: state),
@@ -103,8 +105,9 @@ class _Review extends ConsumerWidget {
         if (state.hasAudio)
           const ListTile(
             leading: Icon(Icons.graphic_eq),
-            title: Text('Votre voix sera gardée, chiffrée, pour la réécoute.'),
+            title: Tr('record.audio_kept'),
           ),
+        const RecordTranslationPanel(),
         const SizedBox(height: 8),
         TransactionForm(
           initialTranscript: state.transcript,
@@ -134,10 +137,9 @@ class _Review extends ConsumerWidget {
       showFailure(context, failure);
       return;
     }
+    final saved = context.tr('record.saved');
     final messenger = ScaffoldMessenger.of(context);
     Navigator.of(context).pop();
-    messenger.showSnackBar(
-      const SnackBar(content: Text('Opération enregistrée ✓')),
-    );
+    messenger.showSnackBar(SnackBar(content: Text(saved)));
   }
 }
