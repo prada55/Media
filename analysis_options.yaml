@@ -9,6 +9,7 @@ analyzer:
     - "test/**/generated/**"
     - android/**
     - ios/**
+    - web/**
   language:
     strict-casts: true
     strict-raw-types: true
