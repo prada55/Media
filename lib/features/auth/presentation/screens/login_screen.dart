@@ -47,6 +47,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(height: 16),
               TextField(
                 key: const ValueKey('login-phone'),
+                autocorrect: false,
+                enableSuggestions: false,
                 controller: _phone,
                 keyboardType: TextInputType.phone,
                 style: const TextStyle(fontSize: 22),

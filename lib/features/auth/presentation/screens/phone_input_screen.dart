@@ -44,6 +44,8 @@ class _PhoneInputScreenState extends ConsumerState<PhoneInputScreen> {
                 children: [
                   TextField(
                     key: const ValueKey('phone-field'),
+                    autocorrect: false,
+                    enableSuggestions: false,
                     controller: _controller,
                     autofocus: true,
                     keyboardType: TextInputType.phone,

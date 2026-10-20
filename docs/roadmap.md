@@ -85,3 +85,14 @@ Tout `TODO` du code doit pointer vers une entrée de ce fichier (`TODO(roadmap#N
 - **R9** — Exécuter `scripts/audit_permissions.sh` sur l'APK et l'IPA release (SDK Android / Xcode requis).
 - **R10** — Remplacer les icônes placeholder (`docs/branding.md`).
 - **R11** — Renseigner raison sociale / adresse dans `docs/privacy-policy.md`, héberger la politique et la page de suppression.
+
+## Décisions Phase 7
+
+| # | Décision | Raison |
+|---|----------|--------|
+| D29 | OTA Android via `flutter_patcher` **non retenu** pour Google Play | Politique « Device and Network Abuse » (remplacement de .so interdit) + permission INTERNET |
+| D30 | Tests e2e : vraie base SQLCipher + vrais dépôts ; Keychain, biométrie, micro et partage simulés | Reproductibilité sans appareil ; la logique réelle est exercée |
+| D31 | Recherche CVE via l'API d'avis de pub.dev | osv.dev inaccessible depuis l'environnement d'audit |
+
+- **R12** — Exécuter `integration_test/` sur Tecno Spark / Infinix Hot et reporter les mesures dans `docs/performance.md`.
+- **R13** — Remplacer PBKDF2 par Argon2id natif ou lier la clé de données à une clé matérielle exigeant l'authentification.
