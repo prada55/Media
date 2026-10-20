@@ -74,10 +74,14 @@ void main() {
     test('verifyPin accepts the right PIN only', () async {
       final salt = service.generateSalt().getOrNull()!;
       final hash = (await service.hashPin('814725', salt)).getOrNull()!;
-      expect((await service.verifyPin('814725', salt, hash)).getOrNull(),
-          isTrue);
-      expect((await service.verifyPin('814726', salt, hash)).getOrNull(),
-          isFalse);
+      expect(
+        (await service.verifyPin('814725', salt, hash)).getOrNull(),
+        isTrue,
+      );
+      expect(
+        (await service.verifyPin('814726', salt, hash)).getOrNull(),
+        isFalse,
+      );
     });
 
     test('short or invalid salt → EncryptionFailure', () async {
@@ -91,8 +95,10 @@ void main() {
   group('AES-256-GCM', () {
     test('round-trip text', () async {
       final key = service.generateKey().getOrNull()!;
-      final sealed =
-          (await service.encryptAesGcm('Vente riz 25 000 F', key)).getOrNull()!;
+      final sealed = (await service.encryptAesGcm(
+        'Vente riz 25 000 F',
+        key,
+      )).getOrNull()!;
       expect(sealed, isNot(contains('riz')));
       final clear = await service.decryptAesGcm(sealed, key);
       expect(clear.getOrNull(), 'Vente riz 25 000 F');
@@ -141,9 +147,8 @@ void main() {
 
   group('secure storage', () {
     test('store / get / delete the DB key', () async {
-      when(
-        () => storage.write(key: kDbKeyStorageKey, value: 'k'),
-      ).thenAnswer((_) async {});
+      when(() => storage.write(key: kDbKeyStorageKey, value: 'k'))
+          .thenAnswer((_) async {});
       when(() => storage.read(key: kDbKeyStorageKey))
           .thenAnswer((_) async => 'k');
       when(() => storage.delete(key: kDbKeyStorageKey))

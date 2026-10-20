@@ -20,3 +20,17 @@ Tout `TODO` du code doit pointer vers une entrée de ce fichier (`TODO(roadmap#N
 - **R1** — `cryptography` 2.9.0 publié le 2025-11-21 : atteint 12 mois le 2026-11-21. Réévaluer (alternative : `cryptography_flutter` / API natives).
 - **R2** — `build_runner` : lever le gel dès qu'injectable_generator supporte analyzer ≥ 14.3.
 - **R3** — Clé de config HMAC : la valeur par défaut est une clé de développement ; la clé de production est injectée via `--dart-define=YAKO_CONFIG_HMAC_KEY` (CI, Phase 7).
+
+## Décisions Phase 2
+
+| # | Décision | Raison |
+|---|----------|--------|
+| D8 | Clé SQLCipher aléatoire en Keychain/Keystore ; **clé de données** (montants, transcriptions) aléatoire, enveloppée par une clé dérivée du PIN (PBKDF2) ; copie biométrique uniquement si l'utilisateur l'active | La base doit s'ouvrir avant la connexion (compteur `auth_attempts`), tandis que les champs sensibles restent illisibles sans PIN/biométrie |
+| D9 | `FLAG_SECURE` sur toute l'activité Android (pas de package) ; voile flouté iOS via notifications `UIScene` | Tous les écrans affichent des données financières ; aucun plugin tiers maintenu ne justifie une dépendance de plus |
+| D10 | Compte à rebours de verrouillage : une lecture DB puis décompte local | Évite une requête DB par seconde |
+| D11 | Empreinte du téléphone = SHA-256(sel + numéro), stockée dans la base chiffrée | Espace des numéros CI ≈ 4×10⁸ : l'empreinte seule ne protège pas contre la force brute, d'où son stockage exclusif dans la base SQLCipher |
+
+## Limites connues (documentées dans docs/security.md en Phase 7)
+
+- **L1** — Le déverrouillage biométrique repose sur `local_auth` (booléen applicatif) + Keychain/Keystore. Sur un appareil rooté/jailbreaké avec extraction du Keystore, la clé biométrique est exposée. Le PIN reste la protection forte.
+- **L2** — `changePin` ne peut pas vérifier que le nouveau PIN n'est pas tiré du numéro (seule l'empreinte du numéro est connue).

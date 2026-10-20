@@ -69,3 +69,49 @@ final class UnknownFailure extends Failure {
     super.stackTrace,
   });
 }
+
+/// Identifiants (téléphone / PIN) incorrects.
+final class AuthenticationFailure extends Failure {
+  const AuthenticationFailure({
+    required super.technicalMessage,
+    this.remainingAttempts,
+    super.userMessageFr = 'Numéro ou code PIN incorrect.',
+    super.cause,
+    super.stackTrace,
+  });
+
+  /// Tentatives restantes avant verrouillage, si connu.
+  final int? remainingAttempts;
+}
+
+/// Trop d'échecs : connexion bloquée pendant [remaining].
+final class LockedOutFailure extends Failure {
+  const LockedOutFailure({
+    required this.remaining,
+    super.technicalMessage = 'Too many failed attempts',
+    super.userMessageFr = 'Trop d’essais. Patientez avant de réessayer.',
+  });
+
+  /// Durée restante de blocage.
+  final Duration remaining;
+}
+
+/// Biométrie indisponible, refusée ou annulée.
+final class BiometricFailure extends Failure {
+  const BiometricFailure({
+    required super.technicalMessage,
+    super.userMessageFr = 'Empreinte ou visage non reconnu.',
+    super.cause,
+    super.stackTrace,
+  });
+}
+
+/// Fonctionnalité absente de ce build (modèle non fourni, etc.).
+final class FeatureNotAvailableFailure extends Failure {
+  const FeatureNotAvailableFailure({
+    required super.technicalMessage,
+    super.userMessageFr = 'Cette fonction n’est pas encore disponible.',
+    super.cause,
+    super.stackTrace,
+  });
+}

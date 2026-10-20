@@ -6,6 +6,7 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.config.dart"
     - "build/**"
+    - "test/**/generated/**"
     - android/**
     - ios/**
   language:

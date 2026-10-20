@@ -15,12 +15,12 @@ String _signed(Map<String, dynamic> json, {String key = _key}) {
 }
 
 Map<String, dynamic> _validJson() => {
-      'app_version': '1.2.3',
-      'api_base_url': 'https://example.test',
-      'monetization_enabled': true,
-      'default_language': 'dyu',
-      'feature_flags': {'voice_translation': true, 'sync': false},
-    };
+  'app_version': '1.2.3',
+  'api_base_url': 'https://example.test',
+  'monetization_enabled': true,
+  'default_language': 'dyu',
+  'feature_flags': {'voice_translation': true, 'sync': false},
+};
 
 class _FakeBundle extends CachingAssetBundle {
   _FakeBundle(this.content);
@@ -92,8 +92,10 @@ void main() {
 
     test('unsupported language falls back to fr', () {
       final json = _validJson()..['default_language'] = 'xx';
-      expect(AppConfig.parse(_signed(json), hmacKey: _key).defaultLanguage,
-          'fr');
+      expect(
+        AppConfig.parse(_signed(json), hmacKey: _key).defaultLanguage,
+        'fr',
+      );
     });
 
     test('defaults keep monetization and flags OFF', () {

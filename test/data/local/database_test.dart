@@ -13,7 +13,7 @@ String _hex(List<int> bytes) =>
     bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
 
 void main() {
-  test('schema v1 creates every table and index', () async {
+  test('current schema creates every table and index', () async {
     final db = AppDatabase(NativeDatabase.memory());
     addTearDown(db.close);
 
@@ -37,9 +37,11 @@ void main() {
         'idx_transactions_created_at',
         'idx_transactions_type',
         'idx_translations_cache_source_hash',
+        'auth_attempts',
+        'idx_auth_attempts_phone_hash',
       ]),
     );
-    expect(db.schemaVersion, 1);
+    expect(db.schemaVersion, 2);
   });
 
   test('SQLCipher file contains no readable data', () async {
@@ -52,7 +54,9 @@ void main() {
     final db = AppDatabase(
       NativeDatabase(file, setup: (raw) => applySqlCipherKey(raw, keyHex)),
     );
-    await db.into(db.auditLog).insert(
+    await db
+        .into(db.auditLog)
+        .insert(
           AuditLogCompanion.insert(
             id: 'a1',
             eventType: 'PLAINTEXT_MARKER_123',

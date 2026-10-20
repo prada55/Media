@@ -27,10 +27,7 @@ enum ConfigSource {
 
 /// Feature flags embedded in the configuration.
 final class FeatureFlagsConfig {
-  const FeatureFlagsConfig({
-    this.voiceTranslation = false,
-    this.sync = false,
-  });
+  const FeatureFlagsConfig({this.voiceTranslation = false, this.sync = false});
 
   /// Traduction vocale (Phase 4).
   final bool voiceTranslation;
@@ -66,15 +63,16 @@ final class AppConfig {
 
   factory AppConfig._fromVerifiedJson(Map<String, dynamic> json) {
     final flags = json['feature_flags'];
-    final flagsMap =
-        flags is Map<String, dynamic> ? flags : const <String, dynamic>{};
+    final flagsMap = flags is Map<String, dynamic>
+        ? flags
+        : const <String, dynamic>{};
     final language = json['default_language'];
     return AppConfig(
       appVersion: _string(json['app_version'], defaults.appVersion),
       apiBaseUrl: _string(json['api_base_url'], defaults.apiBaseUrl),
       monetizationEnabled: json['monetization_enabled'] == true,
-      defaultLanguage: language is String &&
-              _supportedLanguages.contains(language)
+      defaultLanguage:
+          language is String && _supportedLanguages.contains(language)
           ? language
           : defaults.defaultLanguage,
       featureFlags: FeatureFlagsConfig(

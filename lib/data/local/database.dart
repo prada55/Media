@@ -5,7 +5,9 @@
 // de vérité de l'application.
 
 import 'package:drift/drift.dart';
+import 'package:yako/data/local/migrations/migration_v1_v2.dart';
 import 'package:yako/data/local/tables/audit_log_table.dart';
+import 'package:yako/data/local/tables/auth_attempts_table.dart';
 import 'package:yako/data/local/tables/consent_table.dart';
 import 'package:yako/data/local/tables/sync_queue_table.dart';
 import 'package:yako/data/local/tables/transactions_table.dart';
@@ -23,24 +25,25 @@ part 'database.g.dart';
     Consent,
     SyncQueue,
     AuditLog,
+    AuthAttempts,
   ],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase(super.e);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
-        // createAll() crée aussi les index déclarés via @TableIndex.
-        onCreate: (m) => m.createAll(),
-        onUpgrade: (m, from, to) async {
-          // Aucune migration en v1 : les étapes vN → vN+1 sont ajoutées
-          // dans lib/data/local/migrations/ au fil des versions.
-        },
-        beforeOpen: (details) async {
-          await customStatement('PRAGMA foreign_keys = ON');
-        },
-      );
+    // createAll() crée aussi les index déclarés via @TableIndex.
+    onCreate: (m) => m.createAll(),
+    onUpgrade: (m, from, to) async {
+      // Étapes successives : chaque vN → vN+1 vit dans migrations/.
+      if (from < 2) await migrateV1ToV2(m, this);
+    },
+    beforeOpen: (details) async {
+      await customStatement('PRAGMA foreign_keys = ON');
+    },
+  );
 }

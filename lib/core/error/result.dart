@@ -24,38 +24,36 @@ sealed class Result<T> {
 
   /// Returns the value, or `null` on failure.
   T? getOrNull() => switch (this) {
-        Success<T>(:final value) => value,
-        FailureResult<T>() => null,
-      };
+    Success<T>(:final value) => value,
+    FailureResult<T>() => null,
+  };
 
   /// Returns the failure, or `null` on success.
   Failure? getFailureOrNull() => switch (this) {
-        Success<T>() => null,
-        FailureResult<T>(:final failure) => failure,
-      };
+    Success<T>() => null,
+    FailureResult<T>(:final failure) => failure,
+  };
 
   /// Collapses both branches into a single value.
   R fold<R>(
     R Function(T value) onSuccess,
     R Function(Failure failure) onFailure,
-  ) =>
-      switch (this) {
-        Success<T>(:final value) => onSuccess(value),
-        FailureResult<T>(:final failure) => onFailure(failure),
-      };
+  ) => switch (this) {
+    Success<T>(:final value) => onSuccess(value),
+    FailureResult<T>(:final failure) => onFailure(failure),
+  };
 
   /// Transforms the value, keeping a failure untouched.
   Result<R> map<R>(R Function(T value) transform) => switch (this) {
-        Success<T>(:final value) => Success<R>(transform(value)),
-        FailureResult<T>(:final failure) => FailureResult<R>(failure),
-      };
+    Success<T>(:final value) => Success<R>(transform(value)),
+    FailureResult<T>(:final failure) => FailureResult<R>(failure),
+  };
 
   /// Chains another fallible operation on success.
-  Result<R> flatMap<R>(Result<R> Function(T value) transform) =>
-      switch (this) {
-        Success<T>(:final value) => transform(value),
-        FailureResult<T>(:final failure) => FailureResult<R>(failure),
-      };
+  Result<R> flatMap<R>(Result<R> Function(T value) transform) => switch (this) {
+    Success<T>(:final value) => transform(value),
+    FailureResult<T>(:final failure) => FailureResult<R>(failure),
+  };
 }
 
 /// Successful result.

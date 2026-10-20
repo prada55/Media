@@ -31,6 +31,7 @@ dependencies:
   injectable: ^3.0.0
   intl: ^0.20.3
   # Exception documentée à la règle des 12 mois (docs/roadmap.md).
+  local_auth: ^3.0.2
   path: ^1.9.1
   path_provider: ^2.1.6
   # Binaires SQLite via build hooks ; SQLCipher sélectionné plus bas.

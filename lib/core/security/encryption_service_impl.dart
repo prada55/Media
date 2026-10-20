@@ -54,8 +54,8 @@ class EncryptionServiceImpl implements EncryptionService {
     this._directories = const AppDirectories(),
     Random? random,
     int pbkdf2Iterations = kPbkdf2Iterations,
-  })  : _random = random ?? Random.secure(),
-        _iterations = pbkdf2Iterations;
+  }) : _random = random ?? Random.secure(),
+       _iterations = pbkdf2Iterations;
 
   final FlutterSecureStorage _storage;
   final AppDirectories _directories;
@@ -141,21 +141,19 @@ class EncryptionServiceImpl implements EncryptionService {
 
   @override
   Future<Result<void>> storeDbKey(String keyBase64) => _guardStorage(
-        () => _storage.write(key: kDbKeyStorageKey, value: keyBase64),
-        'storeDbKey',
-      );
+    () => _storage.write(key: kDbKeyStorageKey, value: keyBase64),
+    'storeDbKey',
+  );
 
   @override
-  Future<Result<String?>> getDbKey() => _guardStorage(
-        () => _storage.read(key: kDbKeyStorageKey),
-        'getDbKey',
-      );
+  Future<Result<String?>> getDbKey() =>
+      _guardStorage(() => _storage.read(key: kDbKeyStorageKey), 'getDbKey');
 
   @override
   Future<Result<void>> deleteDbKey() => _guardStorage(
-        () => _storage.delete(key: kDbKeyStorageKey),
-        'deleteDbKey',
-      );
+    () => _storage.delete(key: kDbKeyStorageKey),
+    'deleteDbKey',
+  );
 
   Future<Result<T>> _guardStorage<T>(
     Future<T> Function() action,

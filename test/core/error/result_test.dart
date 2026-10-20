@@ -65,7 +65,9 @@ void main() {
     );
     expect(enc.cause, same(error));
     expect(enc.stackTrace, isNotNull);
-    expect(const UnknownFailure(technicalMessage: 'z').userMessageFr,
-        isNotEmpty);
+    expect(
+      const UnknownFailure(technicalMessage: 'z').userMessageFr,
+      isNotEmpty,
+    );
   });
 }
