@@ -10,6 +10,7 @@ import 'package:yako/features/auth/data/datasources/biometric_datasource.dart';
 import 'package:yako/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:yako/features/auth/domain/repositories/auth_repository.dart';
 import 'package:yako/features/auth/domain/services/session_manager.dart';
+import 'package:yako/features/transactions/domain/services/audio_storage_service.dart';
 
 /// Auth registrations.
 @module
@@ -26,10 +27,17 @@ abstract class AuthModule {
     EncryptionService encryption,
     KeyVault vault,
     BiometricDatasource biometrics,
+    AudioStorageService audioStorage,
   ) => AuthRepositoryImpl(
     databaseManager: databaseManager,
     encryption: encryption,
     vault: vault,
     biometrics: biometrics,
+    // Les fichiers audio chiffrés sont effacés avec le compte.
+    extraWipers: [
+      () async {
+        await audioStorage.wipeAll();
+      },
+    ],
   );
 }

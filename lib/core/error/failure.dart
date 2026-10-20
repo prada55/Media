@@ -115,3 +115,13 @@ final class FeatureNotAvailableFailure extends Failure {
     super.stackTrace,
   });
 }
+
+/// Wraps a [Failure] where an exception is required (Riverpod streams).
+final class FailureException implements Exception {
+  const FailureException(this.failure);
+
+  final Failure failure;
+
+  @override
+  String toString() => 'FailureException($failure)';
+}

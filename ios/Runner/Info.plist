@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Yako écoute votre voix pour noter vos ventes et dépenses. L’enregistrement reste chiffré sur ce téléphone. / Yako listens to your voice to record sales and expenses; recordings stay encrypted on this phone.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Yako utilise Face ID pour ouvrir l’application sans taper votre code secret. / Yako uses Face ID to unlock the app without typing your PIN.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>

@@ -21,6 +21,7 @@ import 'package:yako/core/error/failure.dart';
 import 'package:yako/core/error/result.dart';
 import 'package:yako/core/platform/app_directories.dart';
 import 'package:yako/core/security/encryption_service.dart';
+import 'package:yako/core/utils/secure_file.dart';
 import 'package:yako/data/local/database_opener.dart';
 
 /// Number of PBKDF2 iterations (OWASP MASVS L1 baseline for this app).
@@ -289,7 +290,7 @@ class EncryptionServiceImpl implements EncryptionService {
       final dir = await _directories.documents();
       final base = databasePath(dir);
       for (final path in [base, '$base-wal', '$base-shm', '$base-journal']) {
-        await _overwriteAndDelete(File(path));
+        await overwriteAndDelete(File(path), random: _random);
       }
       return const Success(null);
     } on Object catch (e, st) {
@@ -301,28 +302,5 @@ class EncryptionServiceImpl implements EncryptionService {
         ),
       );
     }
-  }
-
-  Future<void> _overwriteAndDelete(File file) async {
-    if (!file.existsSync()) return;
-    final length = await file.length();
-    final raf = await file.open(mode: FileMode.writeOnly);
-    try {
-      const chunk = 64 * 1024;
-      final buffer = Uint8List(chunk);
-      var written = 0;
-      while (written < length) {
-        final size = min(chunk, length - written);
-        for (var i = 0; i < size; i++) {
-          buffer[i] = _random.nextInt(256);
-        }
-        await raf.writeFrom(buffer, 0, size);
-        written += size;
-      }
-      await raf.flush();
-    } finally {
-      await raf.close();
-    }
-    await file.delete();
   }
 }

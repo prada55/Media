@@ -9,9 +9,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:yako/features/auth/domain/services/session_manager.dart';
 import 'package:yako/features/auth/presentation/providers/auth_providers.dart';
 import 'package:yako/features/auth/presentation/screens/auth_gate.dart';
+import 'package:yako/features/transactions/presentation/providers/transaction_providers.dart';
 import 'package:yako/features/transactions/presentation/screens/home_screen.dart';
 
 import '../../helpers/auth_harness.dart';
+import '../../helpers/fake_transaction_repository.dart';
 
 Future<void> _settle(WidgetTester tester) async {
   // PBKDF2 runs in an isolate and SQLite does real I/O: let them finish.
@@ -42,6 +44,9 @@ void main() {
         overrides: [
           authRepositoryProvider.overrideWithValue(harness.repository),
           sessionManagerProvider.overrideWithValue(session),
+          transactionRepositoryProvider.overrideWithValue(
+            FakeTransactionRepository(),
+          ),
         ],
         child: const MaterialApp(home: AuthGate()),
       ),

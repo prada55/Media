@@ -12,4 +12,7 @@ class AppDirectories {
 
   /// Private, non-backed-up documents directory of the app.
   Future<Directory> documents() => getApplicationDocumentsDirectory();
+
+  /// Private cache directory (temporary plaintext audio only).
+  Future<Directory> temporary() => getTemporaryDirectory();
 }

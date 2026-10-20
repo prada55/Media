@@ -34,3 +34,16 @@ Tout `TODO` du code doit pointer vers une entrée de ce fichier (`TODO(roadmap#N
 
 - **L1** — Le déverrouillage biométrique repose sur `local_auth` (booléen applicatif) + Keychain/Keystore. Sur un appareil rooté/jailbreaké avec extraction du Keystore, la clé biométrique est exposée. Le PIN reste la protection forte.
 - **L2** — `changePin` ne peut pas vérifier que le nouveau PIN n'est pas tiré du numéro (seule l'empreinte du numéro est connue).
+
+## Décisions Phase 3
+
+| # | Décision | Raison |
+|---|----------|--------|
+| D12 | STT : `StubSttEngine` (pas de sherpa_onnx embarqué) ; repli formulaire manuel + audio chiffré réécoutable | Aucun modèle fourni ; embarquer onnxruntime sans modèle ajouterait ~30 Mo inutiles. POC décrit dans `docs/voice-rd.md` |
+| D13 | Réécoute via fichier temporaire privé déchiffré puis effacé | La source mémoire de just_audio exige la permission INTERNET (proxy localhost) |
+| D14 | `type` et `created_at` en clair (dans la base SQLCipher) pour filtrer/trier en SQL ; montant et transcriptions chiffrés applicativement | Totaux/recherche en mémoire, pagination par pages de 500 |
+
+## Pistes (roadmap)
+
+- **R4** — Intégrer `SherpaOnnxSttEngine` (voir `docs/voice-rd.md`).
+- **R5** — Index `transactions(created_at DESC)` déjà présent ; au-delà de 10 000 opérations, envisager une table d'agrégats journaliers chiffrés pour les totaux.
