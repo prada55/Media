@@ -1,0 +1,11 @@
+{
+  "app_version": "1.0.0",
+  "api_base_url": "https://api.yako.ci",
+  "monetization_enabled": false,
+  "default_language": "fr",
+  "feature_flags": {
+    "voice_translation": false,
+    "sync": false
+  },
+  "config_signature": "e168e9fcc27e3499a10546986f29d3dc4c3b9ff72d898c311ea48ab67b72b122"
+}
