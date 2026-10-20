@@ -59,3 +59,15 @@ Tout `TODO` du code doit pointer vers une entrée de ce fichier (`TODO(roadmap#N
 
 - **R6** — Faire compléter `assets/i18n/*` par des locuteurs natifs (procédure dans `docs/translation-rd.md`).
 - **R7** — Localiser les `userMessageFr` des Failures via des clés (refactor des couches domaine).
+
+## Décisions Phase 5
+
+| # | Décision | Raison |
+|---|----------|--------|
+| D19 | Payload : 5 champs exactement, `regularity_pct` arrondi à 5 %, volume par tranches | Minimisation / anti-empreinte |
+| D20 | `OfflineConnectivityChecker` (pas de connectivity_plus) | connectivity_plus exige `ACCESS_NETWORK_STATE`, interdit en Phase 6 |
+| D21 | Épinglage TLS par `SecurityContext` sans racines système + certificats PEM épinglés | Empêche les AC compromises / proxys d'interception |
+| D22 | « Signaler un problème » copie l'adresse e-mail (pas d'url_launcher) | Pas de dépendance ni d'appel réseau |
+| D23 | Politique in-app DYU/BCI : mention « en préparation » | Interdiction d'inventer des traductions |
+
+- **R8** — Brancher un vrai `ConnectivityChecker` et `CreditScoreApiHttp` lors de l'activation (checklist dans `docs/monetization.md`).

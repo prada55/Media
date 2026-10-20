@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yako/core/presentation/l10n.dart';
 import 'package:yako/features/auth/presentation/providers/auth_providers.dart';
 import 'package:yako/features/auth/presentation/screens/delete_account_screen.dart';
+import 'package:yako/features/settings/presentation/screens/settings_screen.dart';
 
 /// Overflow menu of the home screen.
 class HomeMenu extends ConsumerWidget {
@@ -21,6 +22,10 @@ class HomeMenu extends ConsumerWidget {
       key: const ValueKey('home-menu'),
       onSelected: (value) {
         switch (value) {
+          case 'settings':
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const SettingsScreen()),
+            );
           case 'logout':
             unawaited(ref.read(authStateProvider.notifier).logout());
           case 'delete':
@@ -32,6 +37,7 @@ class HomeMenu extends ConsumerWidget {
         }
       },
       itemBuilder: (_) => const [
+        PopupMenuItem(value: 'settings', child: Tr('menu.settings')),
         PopupMenuItem(value: 'logout', child: Tr('menu.logout')),
         PopupMenuItem(value: 'delete', child: Tr('delete.title')),
       ],

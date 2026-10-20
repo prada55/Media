@@ -126,6 +126,11 @@ class AuthController extends Notifier<AuthState> {
 
   Future<Result<User>> disableBiometrics() => _service.disableBiometrics();
 
+  Future<Result<void>> changePin({
+    required String currentPin,
+    required String newPin,
+  }) => _service.changePin(currentPin: currentPin, newPin: newPin);
+
   void dismissBiometricOffer() {
     _offerBiometrics = false;
     if (state case AuthAuthenticated(:final user)) {

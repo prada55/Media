@@ -106,6 +106,10 @@ class EncryptionServiceImpl implements EncryptionService {
     }
   }
 
+  @override
+  Future<Result<String>> deriveKeyFromPassword(String password, String salt) =>
+      _pbkdf2(password, salt, '');
+
   Future<Result<String>> _pbkdf2(String pin, String salt, String domain) async {
     try {
       final saltBytes = base64Decode(salt);

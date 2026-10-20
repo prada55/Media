@@ -14,6 +14,10 @@ abstract interface class EncryptionService {
   /// Returns a base64 32-byte key.
   Future<Result<String>> deriveKeyFromPin(String pin, String salt);
 
+  /// Plain PBKDF2-HMAC-SHA256 (100k iterations, no domain suffix) of a
+  /// user password with base64 [salt] — used for portable exports.
+  Future<Result<String>> deriveKeyFromPassword(String password, String salt);
+
   /// 32 random bytes from `Random.secure()`, base64-encoded.
   Result<String> generateSalt();
 
