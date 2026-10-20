@@ -77,21 +77,24 @@ class _Cell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Column(
-        children: [
-          Icon(icon, color: color, size: 28),
-          Text(label),
-          FittedBox(
-            child: Text(
-              Transaction.formatFcfa(value),
-              style: TextStyle(
-                color: color,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 4),
+        child: Column(
+          children: [
+            Icon(icon, color: color, size: 28),
+            Text(label),
+            FittedBox(
+              child: Text(
+                Transaction.formatFcfa(value),
+                style: TextStyle(
+                  color: color,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
