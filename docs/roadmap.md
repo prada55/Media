@@ -71,3 +71,17 @@ Tout `TODO` du code doit pointer vers une entrée de ce fichier (`TODO(roadmap#N
 | D23 | Politique in-app DYU/BCI : mention « en préparation » | Interdiction d'inventer des traductions |
 
 - **R8** — Brancher un vrai `ConnectivityChecker` et `CreditScoreApiHttp` lors de l'activation (checklist dans `docs/monetization.md`).
+
+## Décisions Phase 6
+
+| # | Décision | Raison |
+|---|----------|--------|
+| D24 | iOS minimum 15.0 (au lieu de 13.0) | Plancher de Flutter 3.47 |
+| D25 | targetSdk 36 / compileSdk 36 (au lieu de 34) | Exigence Google Play (août 2026) |
+| D26 | `icons_launcher` 3.1.0 au lieu de `flutter_launcher_icons` | flutter_launcher_icons 0.14.4 publié le 2025-06-10 (> 12 mois) |
+| D27 | Descriptions d'usage iOS bilingues dans une seule chaîne (FR / EN) | Évite d'ajouter des `InfoPlist.strings` au projet Xcode sans pouvoir le compiler ici |
+| D28 | `INTERNET` retiré en release via `tools:node="remove"` ; conservé en debug/profile | Requis par l'outillage Flutter en développement |
+
+- **R9** — Exécuter `scripts/audit_permissions.sh` sur l'APK et l'IPA release (SDK Android / Xcode requis).
+- **R10** — Remplacer les icônes placeholder (`docs/branding.md`).
+- **R11** — Renseigner raison sociale / adresse dans `docs/privacy-policy.md`, héberger la politique et la page de suppression.
