@@ -1,0 +1,9 @@
+# Hébergement Netlify : publie le dossier app/ tel quel (aucune compilation).
+[build]
+  publish = "app"
+  command = ""
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
