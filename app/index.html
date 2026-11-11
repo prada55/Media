@@ -6,97 +6,99 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Moteur">
-  <meta name="theme-color" content="#0b0b10">
-  <meta name="description" content="Moteur Motion — studio de motion design et d'animation sur iPhone : calques, keyframes, texte animé, export vidéo.">
+  <meta name="apple-mobile-web-app-title" content="Moteur Studio">
+  <meta name="theme-color" content="#07070b">
+  <meta name="description" content="Moteur Motion Studio — studio de motion design dans le navigateur : calques, keyframes, courbes Bézier, effets, tracking et export vidéo.">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
   <link rel="stylesheet" href="css/styles.css">
-  <title>Moteur Motion</title>
+  <title>Moteur Motion Studio</title>
 </head>
 <body>
-  <div id="app">
+  <div id="app" class="layout">
     <header class="topbar">
-      <button id="btnProjects" class="ib" aria-label="Projets">
+      <button id="btnProjects" class="ib" aria-label="Projets" title="Projets">
         <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
+      <div class="brand"><span class="logo"></span><span class="bt">Moteur <b>Studio</b></span></div>
       <button id="projTitle" class="title" aria-label="Réglages de la composition">
-        <span id="projName">Sans titre</span>
+        <span><span id="projName">Sans titre</span> <i id="saveState" title="Enregistré">✓</i></span>
         <small id="projMeta">1080×1920 · 30 i/s</small>
       </button>
       <div class="sp"></div>
-      <button id="btnUndo" class="ib" aria-label="Annuler">
+      <button id="btnUndo" class="ib" aria-label="Annuler" title="Annuler (Ctrl+Z)">
         <svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
       </button>
-      <button id="btnRedo" class="ib" aria-label="Rétablir">
+      <button id="btnRedo" class="ib" aria-label="Rétablir" title="Rétablir (Ctrl+Maj+Z)">
         <svg viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg>
+      </button>
+      <button id="btnHelp" class="ib dk" aria-label="Raccourcis" title="Raccourcis clavier (?)">
+        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>
+      </button>
+      <button id="btnSettings" class="ib dk" aria-label="Paramètres de la composition" title="Composition">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
       </button>
       <button id="btnExport" class="pill">Exporter</button>
     </header>
 
-    <main class="viewer" id="viewer">
-      <canvas id="stage"></canvas>
+    <aside id="left" class="side"><nav class="ptabs" id="leftTabs"></nav><div class="pbody" id="leftBody"></div></aside>
+    <div class="vsplit" data-split="left"></div>
+
+    <main id="center">
+      <div class="viewer" id="viewer">
+        <canvas id="stage"></canvas>
+        <div class="vhud"><span id="zoomLabel">100 %</span><span id="perf"></span>
+          <button id="btnFit" class="ib sm" title="Ajuster à la fenêtre" aria-label="Ajuster"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+          <button id="btnFocus" class="ib sm dk" title="Mode focus (F)" aria-label="Mode focus"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M9 5v14"/></svg></button>
+        </div>
+      </div>
+      <div class="transport">
+        <button id="btnStart" class="ib" aria-label="Début" title="Début (Origine)"><svg viewBox="0 0 24 24"><path d="M6 5v14"/><path d="m18 6-8 6 8 6z" class="f"/></svg></button>
+        <button id="btnPrevKey" class="ib" aria-label="Keyframe précédente" title="Keyframe précédente (J)"><svg viewBox="0 0 24 24"><path d="m9 6-6 6 6 6"/><path d="m16 7 5 5-5 5-5-5z" class="f"/></svg></button>
+        <button id="btnPrevFrame" class="ib dk" aria-label="Image précédente" title="Image précédente (←)"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+        <button id="btnPlay" class="play" aria-label="Lecture" title="Lecture (Espace)"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" class="f"/></svg></button>
+        <button id="btnNextFrame" class="ib dk" aria-label="Image suivante" title="Image suivante (→)"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+        <button id="btnNextKey" class="ib" aria-label="Keyframe suivante" title="Keyframe suivante (K)"><svg viewBox="0 0 24 24"><path d="m15 6 6 6-6 6"/><path d="m8 7 5 5-5 5-5-5z" class="f"/></svg></button>
+        <button id="btnEnd" class="ib dk" aria-label="Fin" title="Fin"><svg viewBox="0 0 24 24"><path d="M18 5v14"/><path d="m6 6 8 6-8 6z" class="f"/></svg></button>
+        <button id="btnLoop" class="ib on" aria-label="Boucle" title="Boucle (L)"><svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="m7 22-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></button>
+        <div class="time"><span id="timeLabel">0:00.00</span><small id="frameLabel">0</small></div>
+      </div>
     </main>
 
-    <div class="transport">
-      <button id="btnStart" class="ib" aria-label="Début">
-        <svg viewBox="0 0 24 24"><path d="M6 5v14"/><path d="m18 6-8 6 8 6z" class="f"/></svg>
-      </button>
-      <button id="btnPrevKey" class="ib" aria-label="Keyframe précédente">
-        <svg viewBox="0 0 24 24"><path d="m9 6-6 6 6 6"/><path d="m16 7 5 5-5 5-5-5z" class="f"/></svg>
-      </button>
-      <button id="btnPlay" class="play" aria-label="Lecture">
-        <svg viewBox="0 0 24 24" id="icoPlay"><path d="M7 4.5v15l13-7.5z" class="f"/></svg>
-      </button>
-      <button id="btnNextKey" class="ib" aria-label="Keyframe suivante">
-        <svg viewBox="0 0 24 24"><path d="m15 6 6 6-6 6"/><path d="m8 7 5 5-5 5-5-5z" class="f"/></svg>
-      </button>
-      <button id="btnLoop" class="ib on" aria-label="Boucle">
-        <svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="m7 22-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>
-      </button>
-      <div class="time"><span id="timeLabel">0:00.00</span><small id="frameLabel">i 0</small></div>
-    </div>
+    <div class="vsplit" data-split="right"></div>
+    <aside id="right" class="side"><nav class="ptabs" id="rightTabs"></nav><div class="pbody" id="rightBody"></div></aside>
 
-    <section class="panel" id="panel">
-      <div class="pane" data-pane="timeline" id="paneTimeline"></div>
-      <div class="pane" data-pane="props" id="paneProps"></div>
-      <div class="pane" data-pane="animate" id="paneAnimate"></div>
-      <div class="pane" data-pane="add" id="paneAdd"></div>
+    <div class="hsplit" id="hsplit" title="Glisser pour redimensionner"><i></i></div>
+
+    <section id="bottom">
+      <div class="pane" data-pane="timeline"></div>
+      <div class="pane" data-pane="library"></div>
+      <div class="pane" data-pane="props"></div>
+      <div class="pane" data-pane="animate"></div>
+      <div class="pane" data-pane="effects"></div>
+      <div class="pane" data-pane="track"></div>
     </section>
 
     <nav class="tabbar" id="tabbar">
-      <button data-tab="timeline" class="on">
-        <svg viewBox="0 0 24 24"><path d="M3 6h10M3 12h18M3 18h7"/><path d="M16 3v6M20 15v6"/></svg>
-        <span>Timeline</span>
-      </button>
-      <button data-tab="props">
-        <svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
-        <span>Propriétés</span>
-      </button>
-      <button data-tab="animate">
-        <svg viewBox="0 0 24 24"><path d="m12 3 3 6 6 1-4.5 4.5L18 21l-6-3-6 3 1.5-6.5L3 10l6-1z"/></svg>
-        <span>Animer</span>
-      </button>
-      <button data-tab="add">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
-        <span>Ajouter</span>
-      </button>
+      <button data-tab="timeline" class="on"><svg viewBox="0 0 24 24"><path d="M3 6h10M3 12h18M3 18h7"/><path d="M16 3v6M20 15v6"/></svg><span>Timeline</span></button>
+      <button data-tab="library"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><span>Ajouter</span></button>
+      <button data-tab="props"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg><span>Propriétés</span></button>
+      <button data-tab="animate"><svg viewBox="0 0 24 24"><path d="m12 3 3 6 6 1-4.5 4.5L18 21l-6-3-6 3 1.5-6.5L3 10l6-1z"/></svg><span>Animer</span></button>
+      <button data-tab="effects"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg><span>Effets</span></button>
+      <button data-tab="track"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg><span>Suivi</span></button>
     </nav>
   </div>
 
   <div id="sheet" class="sheet" hidden>
     <div class="sheet-bg" data-close></div>
-    <div class="sheet-card">
-      <div class="sheet-grip"></div>
-      <div id="sheetBody"></div>
-    </div>
+    <div class="sheet-card"><div class="sheet-grip"></div><div id="sheetBody"></div></div>
   </div>
+  <div id="busy" hidden><div class="busy-card"><div class="spin"></div><div id="busyText">Chargement…</div><div class="prog"><i id="busyBar"></i></div><button id="busyCancel" class="btn" hidden>Arrêter</button></div></div>
   <div id="toast" role="status" aria-live="polite"></div>
+  <div id="dropHint">Déposez vos fichiers pour les importer</div>
 
-  <input type="file" id="fileImage" accept="image/*" hidden>
-  <input type="file" id="fileVideo" accept="video/*" hidden>
-  <input type="file" id="fileFont" accept=".ttf,.otf,.woff,.woff2,font/*" hidden>
+  <input type="file" id="fileMedia" accept="image/*,video/*,audio/*,.svg,.mp3,.m4a,.wav" multiple hidden>
   <input type="file" id="fileProject" accept=".json,application/json" hidden>
 
   <script type="module" src="js/app.js"></script>

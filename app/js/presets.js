@@ -60,3 +60,31 @@ function loop(L, prop, t, period, f, e) {
 
 export const PRESET_GROUPS = { in: 'Entrées', out: 'Sorties (finissent à la tête de lecture)', loop: 'Boucles' };
 
+
+// Transitions appliquées aux bords du calque (entrée au début, sortie à la fin).
+function edge(L, prop, edgeKind, dur, from, e) {
+  const to = cur(L, prop, edgeKind === 'in' ? L.start + dur : L.end - dur, prop === 'opacity' || prop === 'scale' ? 100 : undefined);
+  if (edgeKind === 'in') ramp(L, prop, L.start, L.start + dur, from(to), to, e || 'out');
+  else ramp(L, prop, L.end - dur, L.end, to, from(to), e || 'in');
+}
+export const TRANSITIONS = [
+  { id: 'fade', label: 'Fondu', icon: '◐', fn: (L, k, d) => edge(L, 'opacity', k, d, () => 0) },
+  { id: 'zoom', label: 'Zoom', icon: '⊕', fn: (L, k, d) => { edge(L, 'scale', k, d, (v) => v * (k === 'in' ? 0.4 : 1.6), 'expoInOut'); edge(L, 'opacity', k, d * 0.6, () => 0); } },
+  { id: 'slideL', label: 'Glisse ←', icon: '←', fn: (L, k, d, p) => edge(L, 'x', k, d, (v) => v + (k === 'in' ? p.width : -p.width), 'expoInOut') },
+  { id: 'slideR', label: 'Glisse →', icon: '→', fn: (L, k, d, p) => edge(L, 'x', k, d, (v) => v + (k === 'in' ? -p.width : p.width), 'expoInOut') },
+  { id: 'slideU', label: 'Glisse ↑', icon: '↑', fn: (L, k, d, p) => edge(L, 'y', k, d, (v) => v + (k === 'in' ? p.height : -p.height), 'expoInOut') },
+  { id: 'slideD', label: 'Glisse ↓', icon: '↓', fn: (L, k, d, p) => edge(L, 'y', k, d, (v) => v + (k === 'in' ? -p.height : p.height), 'expoInOut') },
+  { id: 'rotate', label: 'Rotation', icon: '↻', fn: (L, k, d) => { edge(L, 'rotation', k, d, (v) => v + (k === 'in' ? -90 : 90), 'expoInOut'); edge(L, 'opacity', k, d, () => 0); } },
+  { id: 'blur', label: 'Flou', icon: '◌', fn: (L, k, d) => { edge(L, 'blur', k, d, () => 40); edge(L, 'opacity', k, d, () => 0); } },
+  { id: 'wipe', label: 'Volet →', icon: '▤', fn: (L, k, d) => (k === 'in' ? edge(L, 's.clipR', k, d, () => 100, 'expoInOut') : edge(L, 's.clipL', k, d, () => 100, 'expoInOut')) },
+  { id: 'wipeUp', label: 'Volet ↑', icon: '▥', fn: (L, k, d) => (k === 'in' ? edge(L, 's.clipT', k, d, () => 100, 'expoInOut') : edge(L, 's.clipB', k, d, () => 100, 'expoInOut')) },
+];
+
+// Accélère / ralentit toutes les keyframes d'un calque autour de la première.
+export function stretchKeys(L, factor) {
+  const times = Object.values(L.kf).flat().map((q) => q.t);
+  if (!times.length) return false;
+  const t0 = Math.min(...times);
+  for (const n in L.kf) for (const q of L.kf[n]) q.t = roundT(t0 + (q.t - t0) / factor);
+  return true;
+}
