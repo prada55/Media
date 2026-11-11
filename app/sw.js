@@ -1,11 +1,13 @@
 // Service worker : l'app fonctionne hors ligne une fois installée.
-const CACHE = 'moteur-studio-v2';
+const CACHE = 'moteur-v3';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './css/styles.css',
   './js/app.js', './js/engine.js', './js/storage.js', './js/presets.js', './js/templates.js', './js/state.js',
   './js/fx.js', './js/audio.js', './js/export.js', './js/tracking.js', './js/tracker.worker.js',
   './js/ui/timeline.js', './js/ui/inspector.js', './js/ui/library.js', './js/ui/trackpanel.js', './js/ui/sheets.js',
   './js/vendor/mp4-muxer.mjs', './js/vendor/webm-muxer.mjs',
+  './montage/', './montage/index.html', './montage/montage.css', './montage/manifest.webmanifest',
+  './montage/js/main.js', './montage/js/core.js', './montage/js/model.js', './montage/js/timeline.js', './montage/js/panels.js', './montage/js/sheets.js', './montage/js/store.js',
   './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png',
 ];
 self.addEventListener('install', (e) => {

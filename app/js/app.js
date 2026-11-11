@@ -267,7 +267,7 @@ function syncMedia(t, playing) {
       if (Math.abs(el.currentTime - lt) > 0.25) el.currentTime = lt;
     } else {
       if (!el.paused) el.pause();
-      if (L.type === 'video' && Math.abs(el.currentTime - lt) > 0.02) el.currentTime = lt;
+      if (L.type === 'video' && !el.seeking && (Math.abs(el.currentTime - lt) > 0.02 || el.readyState < 2)) el.currentTime = lt;
     }
   }
 }

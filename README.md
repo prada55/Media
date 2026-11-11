@@ -1,3 +1,34 @@
+# Moteur — Montage & Motion Studio
+
+Deux applications gratuites, sans abonnement ni filigrane, qui tournent dans le navigateur (PC, Mac, iPhone, Android) :
+
+- **Moteur Montage** — éditeur vidéo multipiste pour TikTok, Reels et YouTube : https://prada55.github.io/Media/montage/
+- **Moteur Motion Studio** — motion design avancé (keyframes, courbes, tracking) : https://prada55.github.io/Media/
+
+## Moteur Montage
+
+| Domaine | Fonctions |
+|---|---|
+| **Piste principale magnétique** | Les clips se suivent automatiquement. Glisser pour réordonner, rogner les bords, couper (S), dupliquer, supprimer sans laisser de trou, remplacer le média. Vignettes de pellicule. |
+| **Pistes libres** | Textes, stickers, incrustations (vidéo / photo par-dessus), musique et voix off, sous-titres. Placement automatique sur une piste libre, magnétisme, piste masquée / muette. |
+| **Clips** | Cadrage Ajuster / Remplir, position, échelle, rotation, opacité avec **keyframes** (zoom ou déplacement animé), vitesse de 0,1× à 10×, volume jusqu'à 200 %, fondus audio, **extraction de l'audio** sur une piste séparée. |
+| **Transitions** | Fondu enchaîné, fondu au noir, glisser (3 directions), pousser, zoom, volet, flou, tourbillon. Durée réglable, application à tous les clips. |
+| **Animations** | Entrées, sorties et boucles (pop, glissement, zoom, rebond, pulsation, flottement, Ken Burns…) sur les clips, textes et stickers. |
+| **Filtres et réglages** | 12 filtres (Vif, Chaud, Froid, N&B, Vintage, Ciné, VHS…) avec intensité, luminosité, contraste, saturation, température, teinte. |
+| **Effets** | Glitch, flou, RGB Split, aberration, vignette, grain, lueur, secousse, pulsation, balancier. |
+| **Texte** | 9 styles (contour, encadré, néon, dégradé, relief 3D…), polices importables, animations lettre par lettre ou mot par mot (machine à écrire, pop, fondu…). |
+| **Stickers** | Plus de 90 emojis, animés automatiquement. |
+| **Sous-titres** | Ajout et édition en liste, style appliqué à tous, **import et export .srt**. |
+| **Voix off** | Enregistrement au micro pendant la lecture. |
+| **Format et fond** | 9:16, 16:9, 1:1, 4:5, 3:4, avec fond flou automatique ou de couleur. |
+| **Export** | MP4 ou WebM, 720p à 4K, 24, 30 ou 60 i/s, avec le son, sans filigrane, rendu image par image. |
+| **PC lent** | Aperçu léger (360p) réglable et effets désactivables dans l'aperçu : l'export reste en pleine qualité. Aucune installation nécessaire. |
+| **Projets** | Sauvegarde automatique, annuler / rétablir, duplication, renommage. |
+
+**Pas encore disponible :** sous-titres automatiques (reconnaissance vocale), lecture à l'envers, détourage automatique, suppression de fond, bibliothèque en ligne de musiques et d'effets. L'export de longues vidéos peut être plus lent que la durée du film sur une machine modeste.
+
+---
+
 # Moteur Motion Studio
 
 Studio de **motion design** qui fonctionne dans le navigateur, sur iPhone, iPad et ordinateur, et s'installe comme une application. L'ergonomie s'inspire des éditeurs mobiles (outils d'animation, timeline au doigt) et l'organisation des propriétés des logiciels de compositing professionnels (calques, keyframes, éditeur de courbes).

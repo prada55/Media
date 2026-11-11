@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Montage">
+  <meta name="theme-color" content="#07070b">
+  <meta name="description" content="Moteur Montage — éditeur vidéo gratuit dans le navigateur : découpe, transitions, textes, musique, sous-titres, export MP4.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="../icons/icon.svg">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="montage.css">
+  <title>Moteur Montage</title>
+</head>
+<body>
+  <div id="mt">
+    <header class="topbar">
+      <button id="btnProjects" class="ib" aria-label="Mes projets" title="Mes projets"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <div class="brand"><span class="logo"></span><span class="bt">Moteur <b>Montage</b></span></div>
+      <button id="projTitle" class="title" title="Renommer"><span><span id="projName">Sans titre</span> <i id="saveState">✓</i></span></button>
+      <div class="sp"></div>
+      <button id="btnUndo" class="ib" aria-label="Annuler" title="Annuler (Ctrl+Z)"><svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+      <button id="btnRedo" class="ib" aria-label="Rétablir" title="Rétablir"><svg viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
+      <button id="btnExport" class="pill">Exporter</button>
+    </header>
+
+    <aside id="left" class="mpanel"></aside>
+
+    <main id="center">
+      <div class="viewer" id="viewer">
+        <canvas id="stage"></canvas>
+        <div class="vhud">
+          <select id="qual" title="Qualité de l'aperçu (n'affecte pas l'export)">
+            <option value="auto">Aperçu auto</option><option value="low">Aperçu léger (PC lent)</option><option value="med">Aperçu moyen</option><option value="high">Aperçu net</option>
+          </select>
+          <label class="fxp" title="Afficher les effets dans l'aperçu"><input type="checkbox" id="fxPrev" checked> Effets</label>
+          <span id="perf"></span>
+        </div>
+        <div class="recdot">● REC</div>
+      </div>
+      <div class="transport">
+        <span class="tl"><b id="timeLabel">0:00.00</b> / <span id="durLabel">0:00.00</span></span>
+        <div class="tc">
+          <button id="btnStart" class="ib" aria-label="Début"><svg viewBox="0 0 24 24"><path d="M6 5v14"/><path d="m18 6-8 6 8 6z" class="f"/></svg></button>
+          <button id="btnPrev" class="ib" aria-label="Image précédente"><svg viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+          <button id="btnPlay" class="play" aria-label="Lecture"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" class="f"/></svg></button>
+          <button id="btnNext" class="ib" aria-label="Image suivante"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+        </div>
+        <span class="tr"></span>
+      </div>
+    </main>
+
+    <aside id="right" class="mpanel"></aside>
+
+    <nav id="tools"></nav>
+    <div class="hsplit" id="hsplit"><i></i></div>
+    <section id="timeline"></section>
+
+    <div id="drawer" hidden>
+      <div class="dhead"><span class="grip"></span><button class="ib sm" data-close-drawer aria-label="Fermer">✕</button></div>
+      <div id="drawerBody"></div>
+    </div>
+  </div>
+
+  <div id="sheet" class="sheet" hidden><div class="sheet-bg" data-close></div><div class="sheet-card"><div class="sheet-grip"></div><div id="sheetBody"></div></div></div>
+  <div id="busy" hidden><div class="busy-card"><div class="spin"></div><div id="busyText">Chargement…</div><div class="prog"><i id="busyBar"></i></div><button id="busyCancel" class="btn" hidden>Arrêter</button></div></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="dropHint">Déposez vos fichiers pour les ajouter au montage</div>
+  <input type="file" id="fileIn" multiple hidden>
+  <input type="file" id="srtIn" accept=".srt,text/plain" hidden>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

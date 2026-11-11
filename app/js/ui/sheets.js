@@ -97,7 +97,8 @@ export async function openProjects() {
       <button class="more" data-more="${x.id}" aria-label="Options">${ICON.more}</button></div>`).join('')}</div>
     <h4>Sauvegarde</h4>
     <div class="row"><button class="btn" data-exportjson style="flex:1">Exporter (.json)</button><button class="btn" data-importjson style="flex:1">Importer…</button></div>
-    <div class="hint">Les projets sont enregistrés automatiquement sur cet appareil. Le fichier .json contient la structure du projet, pas les médias importés.</div>`, async (e) => {
+    <div class="hint">Les projets sont enregistrés automatiquement sur cet appareil. Le fichier .json contient la structure du projet, pas les médias importés.</div>
+    <a class="btn pri block" href="montage/">Ouvrir Moteur Montage (montage vidéo)</a>`, async (e) => {
     const f = e.target.closest('[data-fmt]');
     if (f) { fmt = f.dataset.fmt; $$('.fmt').forEach((b) => b.classList.toggle('on', b === f)); return; }
     if (e.target.closest('[data-new]')) { await A.saveNow(); closeSheet(); await A.openProject(projectFromTemplate('empty', fmt, 'Sans titre'), true); return; }
